@@ -10,7 +10,7 @@ int	Account::_totalNbWithdrawals = 0;
 
 void Account::_displayTimestamp(void)
 {
-	std::time_t	time_now = std::time(nullptr);
+	std::time_t	time_now = std::time(NULL);
 	std::tm		*local_time = std::localtime(&time_now);
 	
 	std::cout << "["
