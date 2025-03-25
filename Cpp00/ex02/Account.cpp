@@ -12,7 +12,7 @@ void Account::_displayTimestamp(void)
 {
 	std::time_t	time_now = std::time(NULL);
 	std::tm		*local_time = std::localtime(&time_now);
-	
+
 	std::cout << "["
 	<< (1900 + local_time->tm_year)
 	<< (local_time->tm_mon + 1 < 10 ? "0" : "") << (local_time->tm_mon + 1)
