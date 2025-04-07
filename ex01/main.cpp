@@ -17,15 +17,15 @@ int main(int ac, char **av)
 		{
 			std::string Fname, Lname, Nname, Phone, Secret;
 			if (phonebook.get_string(Fname, "Enter First Name: ", 1) == -1)
-				return (0);
+				continue ;
 			if (phonebook.get_string(Lname, "Enter Last Name: ", 2) == -1)
-				return (0);
+				continue ;
 			if (phonebook.get_string(Nname, "Enter Nickname: ", 0) == -1)
-				return (0);
+				continue ;
 			if (phonebook.get_string(Phone, "Enter Phone Number: ", 3) == -1)
-				return (0);
+				continue ;
 			if (phonebook.get_string(Secret, "Enter Darkest Secret: ", 0) == -1)
-				return (0);
+				continue ;
 			phonebook.add_contact(Fname, Lname, Nname, Phone, Secret);
 		}
 		else if (command == "SEARCH")
