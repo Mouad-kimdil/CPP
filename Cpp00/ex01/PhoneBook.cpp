@@ -54,14 +54,14 @@ int	PhoneBook::get_string(std::string &str, const std::string &message, int flag
 		if (flag == 2)
 			std::cout << "Last Name containe only alphabetic characters.\n";
 		std::cout << message;
-		if (!std::getline(std::cin, str) || PhoneBook::non_printable(str) || str.empty())
+		if (!std::getline(std::cin, str) || str.empty())
 			return (-1);
 	}
 	while (flag == 3 && is_number(str))
 	{
 		std::cout << "Phone nummber containe only digits.\n";
 		std::cout << message;
-		if (!std::getline(std::cin, str) || PhoneBook::non_printable(str) || str.empty())
+		if (!std::getline(std::cin, str) || str.empty())
 			return (-1);
 	}
 	return (0);
@@ -83,11 +83,11 @@ void	PhoneBook::search_contact()
 {
 	int	i, index;
 
-	std::cout << "----------------------------------------------------------------------------\n";
-	std::cout << "    Index  | First Name |  Last Name |  Nickname  | Phone num  | dark secret|\n";
-	std::cout << "----------------------------------------------------------------------------\n";
+	std::cout << "--------------------------------------------------\n";
+	std::cout << "    Index  | First Name |  Last Name |  Nickname  |\n";
+	std::cout << "--------------------------------------------------\n";
 	for (i = 0; i < count; i++)
-		contacts[i].display_info(i);
+		contacts[i].display_info(i + 1);
 	std::cout << "Enter the index of the contact to display: ";
 	if (!(std::cin >> index))
 	{
@@ -96,10 +96,10 @@ void	PhoneBook::search_contact()
 		return ;
 	}
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	if (index < 0 || index > i - 1)
+	if (index < 1 || index > i)
 	{
 		std::cout << "index not valid" << '\n';
 		return ;
 	}
-	contacts[index].display_all();
+	contacts[index - 1].display_all();
 }

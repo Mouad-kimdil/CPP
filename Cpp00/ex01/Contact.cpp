@@ -1,6 +1,5 @@
 #include "Contact.hpp"
 
-
 void	Contact::set_contact(std::string Fname, std::string Lname, std::string Nname, std::string Pnumber, std::string Dsecret)
 {
 	first_name = Fname;
@@ -15,10 +14,8 @@ void	Contact::display_info(int index) const
 	std::cout << std::setw(10) << index << " | "
 			 << std::setw(10) << (first_name.length() > 10 ? first_name.substr(0, 9) + "." : first_name) << " | "
 			 << std::setw(10) << (last_name.length() > 10 ? last_name.substr(0, 9) + "." : last_name) << " | "
-			 << std::setw(10) << (nick_name.length() > 10 ? nick_name.substr(0, 9) + "." : nick_name) << " | "
-			 << std::setw(10) << "**********" << " | "
-			 << std::setw(10) << "**********" << " | \n";
-	std::cout << "----------------------------------------------------------------------------\n";
+			 << std::setw(10) << (nick_name.length() > 10 ? nick_name.substr(0, 9) + "." : nick_name) << " | \n";
+	std::cout << "--------------------------------------------------\n";
 }
 
 void	Contact::display_all() const
