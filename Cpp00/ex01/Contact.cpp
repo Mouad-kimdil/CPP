@@ -1,6 +1,5 @@
 #include "Contact.hpp"
 
-Contact::Contact() {}
 
 void	Contact::set_contact(std::string Fname, std::string Lname, std::string Nname, std::string Pnumber, std::string Dsecret)
 {

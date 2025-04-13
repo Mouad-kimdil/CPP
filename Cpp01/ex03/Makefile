@@ -1,0 +1,27 @@
+SRC = HumanA.cpp HumanB.cpp Weapon.cpp main.cpp
+INC = HumanA.hpp HumanB.hpp Weapon.hpp
+NAME = Weapon
+
+RM = rm -rf
+CC = c++
+CFLAGS = -Wall -Wextra -Werror -std=c++98
+
+OBJ_DIR = obj
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@
+
+$(OBJ_DIR)/%.o: %.cpp $(INC)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	$(RM) $(OBJ_DIR)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all

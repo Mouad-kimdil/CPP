@@ -17,7 +17,6 @@ class Contact
 		std::string	darkest_secret;
 
 	public:
-		Contact();
 		void	set_contact(std::string Fname, std::string Lname, std::string Nname, std::string Pnumber, std::string Dsecret);
 		void	display_info(int index) const;
 		void	display_all() const;
