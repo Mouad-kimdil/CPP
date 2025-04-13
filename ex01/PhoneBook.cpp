@@ -38,31 +38,27 @@ int PhoneBook::is_number(const std::string &str)
 
 int	PhoneBook::get_string(std::string &str, const std::string &message, int flag)
 {
-	std::cout << message;
-	if (!std::getline(std::cin, str))
-		return (-1);
-	while (PhoneBook::non_printable(str) || str.empty())
+	while (true)
 	{
 		std::cout << message;
 		if (!std::getline(std::cin, str))
 			return (-1);
-	}
-	while ((flag == 1 || flag == 2) && is_alphabetic(str))
-	{
-		if (flag == 1)
-			std::cout << "First Name containe only alphabetic characters.\n";
-		if (flag == 2)
-			std::cout << "Last Name containe only alphabetic characters.\n";
-		std::cout << message;
-		if (!std::getline(std::cin, str) || PhoneBook::non_printable(str) || str.empty())
-			return (-1);
-	}
-	while (flag == 3 && is_number(str))
-	{
-		std::cout << "Phone nummber containe only digits.\n";
-		std::cout << message;
-		if (!std::getline(std::cin, str) || PhoneBook::non_printable(str) || str.empty())
-			return (-1);
+		if (PhoneBook::non_printable(str) || str.empty())
+			continue ;
+		if ((flag == 1 || flag == 2) && is_alphabetic(str))
+		{
+			if (flag == 1)
+				std::cout << "First Name containe only alphabetic characters.\n";
+			if (flag == 2)
+				std::cout << "Last Name containe only alphabetic characters.\n";
+			continue ;
+		}
+		if (flag == 3 && is_number(str))
+		{
+			std::cout << "Phone nummber containe only digits.\n";
+			continue ;
+		}
+		break ;
 	}
 	return (0);
 }
