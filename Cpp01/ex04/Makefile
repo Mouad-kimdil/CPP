@@ -1,4 +1,4 @@
-SRC = sed.cpp
+SRC = sed.cpp main.cpp
 INC = sed.hpp 
 NAME = sed
 

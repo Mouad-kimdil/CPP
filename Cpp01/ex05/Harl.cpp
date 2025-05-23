@@ -22,6 +22,7 @@ void    Harl::error( void )
 
 void    Harl::complain( std::string level)
 {
+    // TODO: This can be done as an enum don't use strings.
     std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
     void    (Harl::*function[])() = {
         &Harl::debug,
@@ -36,6 +37,7 @@ void    Harl::complain( std::string level)
             (this->*function[i])();
             return ;
         }
+        
     }
     std::cout << WRONG_LEVEL << std::endl;
 }

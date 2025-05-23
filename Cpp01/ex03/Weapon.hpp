@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <string.h>
+#include <string>
 
 class Weapon
 {
@@ -10,6 +10,6 @@ class Weapon
 	public:
 		const std::string &getType() const;
 		void	setType(const std::string &new_type);
-		Weapon(const std::string &_type);
+		Weapon(const std::string &type);
 		~Weapon();
 };

@@ -1,67 +1,56 @@
 #include "sed.hpp"
 
-std::string replace_line(std::string line, std::string s1, std::string s2)
-{
-    std::string result;
-    size_t      i;
-
-    i = 0;
-    while (i < line.size())
-    {
-        if (line.substr(i, s1.size()) == s1)
-        {
-            result += s2;
-            i += s1.size();
-        }
-        else
-        {
-            result += line[i];
-            i++;
-        }
-    }
-    return (result);
+Sed::Sed(char **av) {
+	infile.open(av[1]);
+	if (!infile.is_open())
+	{
+		std::cerr << FILE_ERR << std::endl;
+		return ;
+	}
+	if (infile.peek() == std::string::traits_type::eof()) {
+		std::cerr << EMPTY_FILE << std::endl;
+		return ;
+	}
+	outfile.open(std::string(av[1]) + ".replace");
+	if (!outfile.is_open())
+		std::cerr << FILE_ERR << std::endl;
+	to_find = std::string(av[2]);
+	replace = std::string(av[3]);
 }
 
-bool    process_line(std::ofstream &file2, std::string line, std::string s1, std::string s2)
-{
-    std::string     result;
-
-    result = replace_line(line, s1, s2);
-    file2 << result;
-    return (true);
+Sed::~Sed() {
+	if (infile.is_open())
+		infile.close();
+	if (outfile.is_open())
+		outfile.close();
 }
 
-bool    read_file(std::ifstream &file, std::ofstream &file2, std::string s1, std::string s2)
-{
-    std::string line;
+std::string Sed::replace_line( const std::string &line ) {
+	int			pos;
+	size_t		found;
+	std::string	result;
 
-    while (std::getline(file, line))
-    {
-        if (!file.eof())
-            line += '\n';
-        if (!process_line(file2, line, s1, s2))
-            return (false);
-    }
-    return (true);
+	pos = 0;
+	while ((found = line.find(to_find, pos)) != std::string::npos)
+	{
+		result += line.substr(pos, found - pos);
+		result += replace;
+		pos = found + to_find.length();
+	}
+	result += line.substr(pos);
+	return (result);
 }
 
-int main(int ac, char **av)
-{
-    std::ifstream   file;
+void	Sed::process_line(const std::string &line) {
+	outfile << replace_line(line);
+}
 
-    if (ac != 4)
-        return (std::cout << BAD_ARGS << std::endl, 1);
-    file.open(av[1]);
-    if (!file.is_open())
-        return (std::cout << FILE_ERR << std::endl, 1);
-    {
-        std::ofstream file2(std::string(av[1]) + ".replace", std::ios::out | std::ios::trunc);
-        file2.close();
-    }
-    std::ofstream   file2(std::string(av[1]) + ".replace", std::ios::app);
-    if (!file2.is_open())
-        return (file.close(), std::cout << FILE_ERR << std::endl, false);
-    if (!read_file(file, file2, std::string(av[2]), std::string(av[3])))
-        return (file.close(), file2.close(), 1);
-    return (file.close(), file2.close(), 0);
+void	Sed::read_file( void ) {
+	std::string	line;
+
+	while (std::getline(infile, line)) {
+		if (!infile.eof())
+			line += '\n';
+		process_line(line);
+	}
 }
