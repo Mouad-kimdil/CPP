@@ -1,0 +1,168 @@
+IEEE 754
+
+The IEEE 754 standard defines a 32-bit representation for floating-point numbers, divided into three parts:
+
+1. Sign bit (1 bit):
+    . (0) for positive
+    . (1) for negative
+
+2. Exponent (8 bit):
+    . Stored using a bis of 127 (comes from bias = 2^(x - 1) - 1 where x is the number of bits in the exponent field)
+    . Actual exponent = Stored exponent - 127
+
+3. Mantissa of fraction (23 bit):
+    . Represent the significant digit of the number
+    . For normalized numbers, there's an implicit leading 1 before the binary point
+
+So the value of the floating-point number is calculated as:
+    . (-1) ^ sign * 1.mantissa * 2^(exponent - 127)
+
+--------------------------------------------------------------------------------------------
+Steps to Convert a Decimal Number to IEEE 754 Format:
+
+1. Determine the sign bit:
+    . 0 (negative)
+    . 1 (positive)
+2. Convert the decimal number to binary:
+    . Separate the number into its integer part and fractional part
+    . Convert the integer part to binary
+    . Convert the fractional part to binary by multiplying by 2 and recording the carryover
+3. Normalize the binary number:
+    . Adjust the binary part so that it is in the form 1.xxxxxx * 2^n
+    . Count how many positions the binary point was moved; this is the exponent n
+4. Calculate the Biased Exponent:
+    . Add the bias (127 for single precision) to the exponent n to get the stored exponent
+5. Determine the mantissa:
+    . Remove the leading 1 (since it's implicit) form the normalized binary number.
+    . Fill or truncate the remaining bits to make up 23 bits.
+6. Combine all parts:
+    . Concatenate the sign bit, the 8-bit exponent, and the 23-bit mantissa to get the 32-bit IEEE 754 representation.
+
+---------------------------------------------------------------------------------------------
+Application:
+
+    . Let's take a number like 263.3
+
+Step 1: determine the sign
+    . 263.3 is positive so the sign bit is 0
+Step 2: convert to binary
+    . Integer part (263):
+        To Convert from integer to binary we divide by 2 repeatedly:
+            263 / 2 = 131, remainder 1;
+            131 / 2 = 65, remainder 1;
+            65 / 2 = 32, remainder 1;
+            32 / 2 = 16, remainder 0;
+            16 / 2 = 8, remainder 0;
+            8 / 2 = 4, remainder 0;
+            4 / 2 = 2, remainder 0;
+            2 / 2 = 1, remainder 0;
+            1 / 2 = 0, remainder 1;
+            reading the remainder in reverse : 100000111
+    . Fractional part (0.3):
+        To convert the fractional part to binary we multiply by 2 repeatedly:
+            0.3 * 2 = 0.6, integer part 0;
+            0.6 * 2 = 1.2, integer part 1;
+            0.2 * 2 = 0.4, integer part 0;
+            0.4 * 2 = 0.8, integer part 0;
+            0.8 * 2 = 1.6, integer part 1;
+            0.6 * 2 = 1.2, integer part 1;
+            0.2 * 2 = 0.4, integer part 0;
+            0.4 * 2 = 0.8, integer part 0;
+            0.8 * 2 = 1.6, integer part 1;
+            ...
+        This pattern repeats, indicating that 0.3 has a repeating binary fraction.
+        Collecting the integer part: 010011001100...
+    . Combined binary:
+        263.3 in binary is approximately: 100000111.010011001100...
+Step 3: Normalize the binary number:
+    . We need to express 100000111.010011001100... In the form 1.xxxxxx * 2^n
+        . Move the binary point 8 positions to the left: 1.00000111010011001100... * 2^8
+    So the normalized form is
+        . Mantissa: 00000111010011001100... (after removing the implicit leading 1)
+        . Exponent: 8
+Step 4: Calculate the biased exponent:
+    . Exponent = 8
+    . Bias = 127
+    . Stored exponent = 8 + 127 = 135
+    Convert 135 to binary
+        . 135 in binary is 10000111
+Step 5: Determine the Mantissa:
+    . From the normalized binary 1.00000111010011001100..., we remove the leading 1 and take
+        the next 23 bit
+    . Mantissa 00000111010011001100110 (rounded to 23 bit)
+Step 6: Combine all parts:
+    . Sign bit 0
+    . Exponent 10000111
+    . Mantissa 00000111010011001100110
+    Combined:
+        . 0 10000111 00000111010011001100110
+
+-------------------------------------------------------------------------------------------
+Step-by-Step Conversion from IEEE 754 to Decimal:
+
+Step 1. Break down the binary representation:
+    . Sign bit (1 bit): 0
+    . Exponent (8 bit): 10000111
+    . Mantissa (23 bit): 00000111010011001100110
+Step 2. Calculate the Exponent:
+    . Binary exponent 10000111
+    . Decimal exponent 135
+    . Unbiased exponent 135 - 127 = 8
+Step 3. Calculate the Mantissa (fraction part)
+    . The mantissa represents the fractional part of the number. Since IEEE 754 assumes a
+    leading 1 for normalized numbers, we add this implicit bit 00000111010011001100110
+    To convert the fractional part to decimal:
+        . Multiply each binary digit by its corresponding power of two and sum the results.
+        . Each digit after the binary point (similar to the decimal point) represents a
+            negative power of two
+            . The first digit after the point is 2⁻¹ (0.5)
+            . The second is 2⁻² (0.25)
+            . And so on
+    So: 00000111010011001100110
+ _______________________________________________________________________________________________
+| Position                                   | Bit | Power of 2 | Value                         |
+| ------------------------------------------ | --- | ---------- | ----------------------------- |
+| 1                                          | 0   | 2⁻¹        | 0 × 0.5                       |
+| 2                                          | 0   | 2⁻²        | 0 × 0.25                      |
+| 3                                          | 0   | 2⁻³        | 0 × 0.125                     |
+| 4                                          | 0   | 2⁻⁴        | 0 × 0.0625                    |
+| 5                                          | 0   | 2⁻⁵        | 0 × 0.03125                   |
+| 6                                          | 1   | 2⁻⁶        | 1 × 0.015625                  |
+| 7                                          | 1   | 2⁻⁷        | 1 × 0.0078125                 |
+| 8                                          | 1   | 2⁻⁸        | 1 × 0.00390625                |
+| 9                                          | 0   | 2⁻⁹        | 0 × 0.001953125               |
+| 10                                         | 1   | 2⁻¹⁰       | 1 × 0.0009765625              |
+| 11                                         | 0   | 2⁻¹¹       | 0 × 0.00048828125             |
+| 12                                         | 1   | 2⁻¹²       | 1 × 0.000244140625            |
+| 13                                         | 1   | 2⁻¹³       | 1 × 0.0001220703125           |
+| 14                                         | 0   | 2⁻¹⁴       | 0 × 0.00006103515625          |
+| 15                                         | 0   | 2⁻¹⁵       | 0 × 0.000030517578125         |
+| 16                                         | 1   | 2⁻¹⁶       | 1 × 0.0000152587890625        |
+| 17                                         | 1   | 2⁻¹⁷       | 1 × 0.00000762939453125       |
+| 18                                         | 0   | 2⁻¹⁸       | 0 × 0.000003814697265625      |
+| 19                                         | 0   | 2⁻¹⁹       | 0 × 0.0000019073486328125     |
+| 20                                         | 1   | 2⁻²⁰       | 1 × 0.00000095367431640625    |
+| 21                                         | 1   | 2⁻²¹       | 1 × 0.000000476837158203125   |
+| 22                                         | 0   | 2⁻²²       | 0 × 0.0000002384185791015625  |
+| 23                                         | 0   | 2⁻²³       | 0 × 0.00000011920928955078125 |
+|____________________________________________|_____|____________|_______________________________|
+
+Now, summing the values of the bits set to 1:
+    . 2⁻⁶: 0.015625
+    . 2⁻⁷: 0.0078125
+    . 2⁻⁸: 0.00390625
+    . 2⁻¹⁰: 0.0009765625
+    . 2⁻¹²: 0.000244140625
+    . 2⁻¹³: 0.0001220703125
+    . 2⁻¹⁶: 0.0000152587890625
+    . 2⁻¹⁷: 0.00000762939453125
+    . 2⁻²⁰: 0.00000095367431640625
+    . 2⁻²¹: 0.000000476837158203125
+    adding together gives: 0.02871044158935546875
+
+    .Thus the full Mantissa is: 1 + 0.028 = 1.028
+Step 3. Compute the Final Decimal Value:
+    Using the formula:
+        (-1)^sign * Mantissa * 2^(exponent)
+    gives:
+        (-1)^0 × 1.028 × 2^8 = 1.028 × 256 = 263.168
