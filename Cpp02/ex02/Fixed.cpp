@@ -44,26 +44,93 @@ std::ostream &operator<<( std::ostream &os, const Fixed &fixed ) {
     return (os);
 }
 
-bool    operator>( const Fixed &c1, const Fixed &c2 ) {
-    return (c1.getRawBits() > c1.getRawBits());
+bool Fixed::operator>(const Fixed &other) const {
+    return (_value > other._value);
 }
 
-bool    operator<( const Fixed &c1, const Fixed &c2 ) {
-    return (c1.getRawBits() < c1.getRawBits());
+bool Fixed::operator<(const Fixed &other) const {
+    return (_value < other._value);
 }
 
-bool    operator>=( const Fixed &c1, const Fixed &c2 ) {
-    return (c1.getRawBits() >= c1.getRawBits());
+bool Fixed::operator>=(const Fixed &other) const {
+    return (_value >= other._value);
 }
 
-bool    operator<=( const Fixed &c1, const Fixed &c2 ) {
-    return (c1.getRawBits() <= c1.getRawBits());
+bool Fixed::operator<=(const Fixed &other) const {
+    return (_value <= other._value);
 }
 
-bool    operator==( const Fixed &c1, const Fixed &c2 ) {
-    return (c1.getRawBits() == c2.getRawBits());
+bool Fixed::operator==(const Fixed &other) const {
+    return (_value == other._value);
 }
 
-bool    operator!=( const Fixed &c1, const Fixed &c2 ) {
-    return (c1.getRawBits() != c2.getRawBits());
+bool Fixed::operator!=(const Fixed &other) const {
+    return (_value != other._value);
+}
+
+Fixed Fixed::operator+(const Fixed &other) const {
+    return Fixed(this->toFloat() + other.toFloat());
+}
+
+Fixed Fixed::operator-(const Fixed &other) const {
+    return Fixed(this->toFloat() - other.toFloat());
+}
+
+Fixed Fixed::operator*(const Fixed &other) const {
+    Fixed result;
+
+    long long product = static_cast<long long>(_value) * other.getRawBits();
+    int scaled = static_cast<int>(product >> fraction);
+    result.setRawBits(scaled);
+    return (result);
+}
+
+Fixed Fixed::operator/(const Fixed &other) const {
+    Fixed fixed_result;
+    if (other.getRawBits() == 0) {
+        std::cerr << "Division by zero" << std::endl;
+        return Fixed(0);
+    }
+    long long dividend = static_cast<long long>(_value) << fraction;
+    int result = static_cast<int>(dividend / other.getRawBits());
+    fixed_result.setRawBits(result);
+    return (fixed_result);
+}
+
+Fixed   &Fixed::operator++( void ) {
+    _value += 1;
+    return (*this);
+}
+
+Fixed   &Fixed::operator--( void ) {
+    _value -= 1;
+    return (*this);
+}
+
+Fixed   Fixed::operator++( int ) {
+    Fixed   tmp(*this);
+    _value += 1;
+    return (tmp);
+}
+
+Fixed   Fixed::operator--( int ) {
+    Fixed   tmp(*this);
+    _value -= 1;
+    return (tmp);
+}
+
+Fixed   &Fixed::min( Fixed &a, Fixed &b ) {
+    return (a.getRawBits() < b.getRawBits() ? a : b);
+}
+
+const Fixed &Fixed::min( const Fixed &a, const Fixed &b ) {
+    return (a.getRawBits() < b.getRawBits() ? a : b);
+}
+
+Fixed   &Fixed::max( Fixed &a, Fixed &b ) {
+    return (a.getRawBits() > b.getRawBits() ? a : b);
+}
+
+const Fixed &Fixed::max( const Fixed &a, const Fixed &b ) {
+    return (a.getRawBits() > b.getRawBits() ? a : b);
 }

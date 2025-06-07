@@ -19,12 +19,29 @@ class Fixed {
         int toInt( void ) const ;
         int getRawBits( void ) const;
         void setRawBits( int const raw );
+
+        
+        bool operator>(const Fixed &other) const;
+        bool operator<(const Fixed &other) const;
+        bool operator>=(const Fixed &other) const;
+        bool operator<=(const Fixed &other) const;
+        bool operator==(const Fixed &other) const;
+        bool operator!=(const Fixed &other) const;
+        
+        Fixed   operator+(const Fixed &other ) const;
+        Fixed   operator-(const Fixed &other ) const;
+        Fixed   operator*(const Fixed &other ) const;
+        Fixed   operator/(const Fixed &other ) const;
+
+        Fixed   &operator++( void );
+        Fixed   &operator--( void );
+        Fixed   operator++( int );
+        Fixed   operator--( int );
+
+        static Fixed &min(Fixed &a, Fixed &b);
+        static const Fixed &min(const Fixed &a, const Fixed &b);
+        static Fixed &max(Fixed &a, Fixed &b);
+        static const Fixed &max(const Fixed &a, const Fixed &b);
 };
 
 std::ostream &operator<<( std::ostream& os, const Fixed &other );
-bool    operator>( const Fixed &c1, const Fixed &c2 );
-bool    operator<( const Fixed &c1, const Fixed &c2 );
-bool    operator>=( const Fixed &c1, const Fixed &c2 );
-bool    operator<=( const Fixed &c1, const Fixed &c2 );
-bool    operator==( const Fixed &c1, const Fixed &c2 );
-bool    operator!=( const Fixed &c1, const Fixed &c2 );
