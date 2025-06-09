@@ -1,6 +1,6 @@
-SRC = main.cpp Fixed.cpp
-INC = Fixed.hpp 
-NAME = Fixed
+SRC = main.cpp Fixed.cpp Point.cpp bsp.cpp
+INC = Fixed.hpp Point.hpp 
+NAME = BSP
 
 RM = rm -rf
 CC = c++
