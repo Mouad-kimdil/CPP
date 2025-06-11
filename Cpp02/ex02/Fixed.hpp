@@ -15,12 +15,12 @@ class Fixed {
         Fixed( const Fixed &other );
         Fixed &operator=( const Fixed &other );
         ~Fixed();
+
         float toFloat( void ) const;
         int toInt( void ) const ;
         int getRawBits( void ) const;
         void setRawBits( int const raw );
 
-        
         bool operator>(const Fixed &other) const;
         bool operator<(const Fixed &other) const;
         bool operator>=(const Fixed &other) const;
