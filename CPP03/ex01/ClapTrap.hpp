@@ -4,11 +4,11 @@
 #include <string>
 
 class ClapTrap {
-    private:
+    protected:
         std::string Name;
         int         HitPoint;
         int         EnergyPoint;
-        int         AttackDammage;
+        int         AttackDamage;
     public:
         ClapTrap();
         ClapTrap( std::string name );

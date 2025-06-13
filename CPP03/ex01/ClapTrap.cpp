@@ -1,10 +1,10 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : Name(""), HitPoint(10), EnergyPoint(10), AttackDammage(0) {
+ClapTrap::ClapTrap() : Name(""), HitPoint(10), EnergyPoint(10), AttackDamage(0) {
     std::cout << "The default constructor has been called!" << std::endl;
 }
 
-ClapTrap::ClapTrap( std::string name ) : Name(name), HitPoint(10), EnergyPoint(10), AttackDammage(0) {
+ClapTrap::ClapTrap( std::string name ) : Name(name), HitPoint(10), EnergyPoint(10), AttackDamage(0) {
     std::cout << "The parametrize constructor has been called!" << std::endl;
 }
 
@@ -12,7 +12,7 @@ ClapTrap::ClapTrap( const ClapTrap &other ) {
     Name = other.Name;
     HitPoint = other.HitPoint;
     EnergyPoint = other.EnergyPoint;
-    AttackDammage = other.AttackDammage;
+    AttackDamage = other.AttackDamage;
     std::cout << "The copy constructor has been called!" << std::endl;
 }
 
@@ -21,7 +21,7 @@ ClapTrap    &ClapTrap::operator=( const ClapTrap &other ) {
         Name = other.Name;
         HitPoint = other.HitPoint;
         EnergyPoint = other.EnergyPoint;
-        AttackDammage = other.AttackDammage;
+        AttackDamage = other.AttackDamage;
     }
     return (*this);
 }
@@ -34,7 +34,7 @@ void    ClapTrap::attack( const std::string &target ) {
     if (EnergyPoint > 0) {
         EnergyPoint--;
         std::cout << "ClapTrap " << Name << " attacks " 
-        << target << ", causing " << AttackDammage 
+        << target << ", causing " << AttackDamage 
         << " points of damage!" << std::endl;
     }
     else {
