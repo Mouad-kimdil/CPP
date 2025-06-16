@@ -1,11 +1,11 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap() : Name(""), HitPoint(10), EnergyPoint(10), AttackDamage(0) {
-    std::cout << "The default constructor has been called!" << std::endl;
+    std::cout << "ClapTrap default constructor has been called!" << std::endl;
 }
 
 ClapTrap::ClapTrap( std::string name ) : Name(name), HitPoint(10), EnergyPoint(10), AttackDamage(0) {
-    std::cout << "The parametrize constructor has been called!" << std::endl;
+    std::cout << "ClapTrap parameterized constructor has been called!" << std::endl;
 }
 
 ClapTrap::ClapTrap( const ClapTrap &other ) {
@@ -13,7 +13,7 @@ ClapTrap::ClapTrap( const ClapTrap &other ) {
     HitPoint = other.HitPoint;
     EnergyPoint = other.EnergyPoint;
     AttackDamage = other.AttackDamage;
-    std::cout << "The copy constructor has been called!" << std::endl;
+    std::cout << "ClapTrap copy constructor has been called!" << std::endl;
 }
 
 ClapTrap    &ClapTrap::operator=( const ClapTrap &other ) {
@@ -27,7 +27,7 @@ ClapTrap    &ClapTrap::operator=( const ClapTrap &other ) {
 }
 
 ClapTrap::~ClapTrap() {
-    std::cout << "The destructor has been called!" << std::endl;
+    std::cout << "ClapTrap destructor has been called!" << std::endl;
 }
 
 void    ClapTrap::attack( const std::string &target ) {

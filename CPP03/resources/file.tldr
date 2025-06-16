@@ -261,9 +261,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 2065.8564401749572,
-			"y": 3523.1387109223797,
-			"lastActivityTimestamp": 1749931486970,
+			"x": -2566.2619396237596,
+			"y": -1474.3541845090153,
+			"lastActivityTimestamp": 0,
 			"meta": {}
 		},
 		{
@@ -1332,9 +1332,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": -1237.9585369342967,
-			"y": -2393.030949130383,
-			"z": 0.3196912951387805,
+			"x": 2566.2619396237596,
+			"y": 1474.3541845090153,
+			"z": 0.08523124072880896,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -2002,10 +2002,8 @@
 		{
 			"editingShapeId": null,
 			"croppingShapeId": null,
-			"selectedShapeIds": [
-				"shape:aaCOXJsgeccZKaoxMlpT7"
-			],
-			"hoveredShapeId": "shape:aaCOXJsgeccZKaoxMlpT7",
+			"selectedShapeIds": [],
+			"hoveredShapeId": null,
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -3645,7 +3643,7 @@
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
-				"type": "grabbing",
+				"type": "default",
 				"rotation": 0
 			},
 			"isFocusMode": false,
@@ -3655,7 +3653,7 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 906,
+				"w": 539,
 				"h": 568
 			},
 			"insets": [
