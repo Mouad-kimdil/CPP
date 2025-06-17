@@ -15,6 +15,9 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {
+    this->HitPoint = other.HitPoint;
+    this->EnergyPoint = other.EnergyPoint;
+    this->AttackDamage = other.AttackDamage;
     std::cout << "ScavTrap Copy constructor has been called!" << std::endl;
 }
 

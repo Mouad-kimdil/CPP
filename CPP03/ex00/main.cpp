@@ -1,8 +1,8 @@
 #include "ClapTrap.hpp"
 
 int main() {
-    // Test constructors
     std::cout << "\n--- Testing Constructors ---\n" << std::endl;
+
     ClapTrap defaultTrap;
     ClapTrap bob("Bob");
     ClapTrap bobClone(bob);
@@ -19,7 +19,6 @@ int main() {
         bob.attack("Enemy");
     }
 
-    // Test after energy depletion
     bob.attack("Enemy");
     bob.beRepaired(5);
     

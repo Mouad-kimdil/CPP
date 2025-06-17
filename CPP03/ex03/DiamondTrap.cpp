@@ -24,13 +24,27 @@ DiamondTrap::DiamondTrap( std::string name ) :
     std::cout << "DiamondTrap constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap( const DiamondTrap &other ) : ClapTrap(other) {
+DiamondTrap::DiamondTrap( const DiamondTrap &other ) : 
+    ClapTrap(other),
+    ScavTrap(other),
+    FragTrap(other),
+    Name(other.Name)
+{
+    this->HitPoint = other.HitPoint;
+    this->EnergyPoint = other.EnergyPoint;
+    this->AttackDamage = other.AttackDamage;
     std::cout << "DiamondTrap copy constructor called" << std::endl;
 }
 
 DiamondTrap &DiamondTrap::operator=( const DiamondTrap &other ) {
     if (this != &other) {
         ClapTrap::operator=(other);
+        ScavTrap::operator=(other);
+        FragTrap::operator=(other);
+        this->Name = other.Name;
+        this->HitPoint = other.HitPoint;
+        this->EnergyPoint = other.EnergyPoint;
+        this->AttackDamage = other.AttackDamage;
     }
     std::cout << "DiamondTrap copy assignment operator called" << std::endl;
     return (*this);
