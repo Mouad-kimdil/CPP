@@ -1,5 +1,5 @@
-SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp
-INC = Animal.hpp Dog.hpp Cat.hpp
+SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+INC = Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
 NAME = animal
 
 RM = rm -rf
