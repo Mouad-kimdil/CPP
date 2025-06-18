@@ -1,6 +1,6 @@
-SRC = main.cpp
-INC = 
-NAME = 
+SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp
+INC = Animal.hpp Dog.hpp Cat.hpp
+NAME = animal
 
 RM = rm -rf
 CC = c++
