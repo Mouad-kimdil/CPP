@@ -32,7 +32,7 @@ int main() {
         std::cout << "Animal " << k << " is a " << animals[k]->getType() << " and makes sound: ";
         animals[k]->makeSound();
     }
-    
+
     for (int k = 0; k < numAnimals; k++) {
         delete animals[k];
     }
