@@ -1,16 +1,18 @@
 #pragma once
 
-#include "ICharacter.hpp"
 #include <iostream>
 #include <string>
 
+class ICharacter;
+
 class AMateria {
     protected:
-        std::string const &type;
+        std::string type;
     public:
-        AMateria()
+        AMateria();
         AMateria( std::string const &type );
-        ~AMateria();
+        AMateria( const AMateria &other );
+        virtual ~AMateria();
         AMateria &operator=( const AMateria &other );
 
         std::string const &getType() const; // Return the materia type

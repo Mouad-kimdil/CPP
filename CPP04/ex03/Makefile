@@ -1,5 +1,5 @@
-SRC = main.cppA Materia.cpp ICharacter.cpp Ice.cpp Cure.cpp 
-INC = AMateria.hpp ICharacter.hpp Ice.hpp Cure.hpp 
+SRC = main.cpp AMateria.cpp Ice.cpp Cure.cpp MateriaSource.cpp Character.cpp
+INC = AMateria.hpp ICharacter.hpp Ice.hpp Cure.hpp IMateriaSource.hpp MateriaSource.hpp Character.hpp
 NAME = Interface
 
 RM = rm -rf
