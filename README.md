@@ -142,3 +142,7 @@ Each module builds upon concepts from previous modules, creating a comprehensive
 - **Error Handling**: Defensive programming with null checks and bounds validation
 
 This repository demonstrates a complete journey from basic C++ concepts to advanced object-oriented design patterns, providing a solid foundation for modern C++ development.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
