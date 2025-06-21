@@ -9,7 +9,7 @@
 int main() {
     std::cout << "=== Testing MateriaSource ===" << std::endl;
     
-    IMateriaSource* src = new MateriaSource();
+    IMateriaSource *src = new MateriaSource();
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
     
