@@ -61,16 +61,17 @@ This repository contains implementations of C++ modules focusing on core object-
 
 ### CPP04 - Polymorphism & Abstract Classes
 **Concepts Covered:**
-- Runtime polymorphism
+- Runtime polymorphism vs compile-time binding
 - Virtual functions and pure virtual functions
 - Abstract classes and interfaces
 - Deep vs shallow copying
 - Design patterns (Factory, Prototype)
+- Correct vs incorrect polymorphism implementation
 
 **Exercises:**
-- **ex00**: Animal polymorphism basics
+- **ex00**: Animal polymorphism basics + WrongAnimal/WrongCat (demonstrates incorrect polymorphism)
 - **ex01**: Deep copy with Brain class
-- **ex02**: Abstract Animal class
+- **ex02**: Abstract Animal class (same main as ex01, but Animal cannot be instantiated)
 - **ex03**: Materia system with interfaces
 
 **Resources:**

@@ -1,11 +1,13 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 #include "Brain.hpp"
 
 int main() {
     std::cout << "===== Basic Animal Tests =====" << std::endl;
-    // const Animal *meta = new Animal(); // this will no longer compile
+    // const Animal *meta = new Animal(); // this will no longer compile - Animal is abstract
     const Animal *j = new Dog();
     const Animal *i = new Cat();
     
@@ -14,7 +16,15 @@ int main() {
     
     i->makeSound();
     j->makeSound();
-    // meta->makeSound();
+    // meta->makeSound(); // Cannot call - Animal is abstract
+    
+    std::cout << "\n===== Wrong Animal Tests (No Polymorphism) =====" << std::endl;
+    const WrongAnimal *wrongMeta = new WrongAnimal();
+    const WrongAnimal *wrongCat = new WrongCat();
+    
+    std::cout << wrongCat->getType() << " " << std::endl;
+    wrongCat->makeSound(); // Will call WrongAnimal::makeSound(), not WrongCat::makeSound()
+    wrongMeta->makeSound();
     
     std::cout << "\n===== Array of Animals =====" << std::endl;
     const int numAnimals = 4;
@@ -65,7 +75,8 @@ int main() {
 
     delete copyDog;
     delete copyCat;
-    // delete meta;
+    delete wrongMeta;
+    delete wrongCat;
     delete j;
     delete i;
     
